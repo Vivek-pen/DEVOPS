@@ -1,0 +1,24 @@
+# Docker
+
+Install docker desktop
+
+check installation with  docker --version and docker info
+
+Image - blueprint of your program
+
+container - running instance of the image
+
+Volume - storing data, DockerFile - used to store instructions to build an image
+
+pull image - docker pull nginx
+
+docker --version
+docker pull nginx
+docker run -d --name testweb -p 8080:80 nginx      //running a docker container
+docker ps
+
+docker images
+
+docker stop testweb
+docker rm testweb
+docker rmi nginx

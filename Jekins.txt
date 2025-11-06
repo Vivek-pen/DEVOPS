@@ -1,0 +1,29 @@
+# Jenkins
+
+Install jenkins 
+
+complete the steps to install
+
+open [localhost:8080](http://localhost:8080) to access jenkins dashboard
+
+copy and search for admin password
+
+new item → Name it and select freestyle project
+
+Add build steps → paste echo “Hello from jenkins
+
+save → build now
+
+# **CI/CD using jenkins**
+
+create an app.js and test.js with console.log in both
+
+add git and commit the program and push to github repo
+
+Go to jenkins and pipeline project name it simple cicd
+
+add pipeline script se bat for windows
+
+press build now.
+
+Jenkins automatically pulls the code from github, runs the project and performs tests and notifies if there is any error.
