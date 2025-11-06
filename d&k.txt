@@ -1,0 +1,140 @@
+🧩 PART 1: DOCKER BASICS
+📘 What is Docker?
+
+Docker is used to package applications and their dependencies into containers so they can run anywhere.
+
+⚙️ Common Docker Commands (Cheatsheet Style)
+Command	Description	Example
+docker --version	Check Docker version	docker --version
+docker pull <image>	Download image from Docker Hub	docker pull nginx
+docker images	List all downloaded images	docker images
+docker run <image>	Run a container from image	docker run nginx
+docker run -d -p 8080:80 nginx	Run container in background, map port 80 to 8080	Access at: http://localhost:8080
+docker ps	Show running containers	docker ps
+docker ps -a	Show all containers (including stopped)	docker ps -a
+docker stop <container_id>	Stop a running container	docker stop 1a2b3c
+docker rm <container_id>	Remove container	docker rm 1a2b3c
+docker rmi <image_id>	Remove image	docker rmi nginx
+docker build -t myapp .	Build Docker image from Dockerfile	Inside your project folder
+docker exec -it <container_id> bash	Open terminal inside container	Used to inspect
+docker logs <container_id>	View container logs	docker logs mynginx
+📦 Example: Simple Containerized App
+
+1️⃣ Create a file named server.js
+
+const http = require('http');
+const server = http.createServer((req, res) => {
+  res.end('Hello from Docker Container!');
+});
+server.listen(3000);
+
+
+2️⃣ Create Dockerfile
+
+FROM node:18
+WORKDIR /app
+COPY . .
+CMD ["node", "server.js"]
+
+
+3️⃣ Run commands:
+
+docker build -t mynodeapp .
+docker run -d -p 8080:3000 mynodeapp
+
+
+✅ Visit http://localhost:8080 → “Hello from Docker Container!”
+
+🧠 PART 2: KUBERNETES (K8s)
+📘 What is Kubernetes?
+
+Kubernetes automates the deployment, scaling, and management of containers.
+Think of it as a container orchestrator — it manages Docker containers.
+
+⚙️ Setting Up Kubernetes on Windows (Simple Steps)
+
+1️⃣ Install Docker Desktop → Settings → Enable “Kubernetes”
+🟢 Wait until Kubernetes status says “Running”.
+
+2️⃣ Verify Installation
+
+kubectl version --client
+kubectl get nodes
+
+
+👉 Should show one node (Docker Desktop).
+
+🧩 PART 3: Common Kubernetes Commands (Cheatsheet)
+Command	Description	Example
+kubectl version	Show Kubernetes version	kubectl version
+kubectl get nodes	Show cluster nodes	kubectl get nodes
+kubectl get pods	Show all pods	kubectl get pods
+kubectl get services	Show all services	kubectl get services
+kubectl create -f <file>.yaml	Create resource from YAML file	kubectl create -f deployment.yaml
+kubectl apply -f <file>.yaml	Create/update resource	kubectl apply -f deployment.yaml
+kubectl delete -f <file>.yaml	Delete resource	kubectl delete -f deployment.yaml
+kubectl logs <pod-name>	View logs from a pod	kubectl logs mypod
+kubectl exec -it <pod-name> -- bash	Enter inside a running pod	kubectl exec -it mypod -- bash
+kubectl describe pod <pod-name>	View details of a pod	kubectl describe pod mypod
+kubectl get all	Show all resources	kubectl get all
+🚀 PART 4: Deploy Docker App on Kubernetes
+Step 1: Create Deployment File deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mynode-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mynode
+  template:
+    metadata:
+      labels:
+        app: mynode
+    spec:
+      containers:
+        - name: mynode
+          image: mynodeapp  # your docker image name
+          ports:
+            - containerPort: 3000
+
+Step 2: Create Service File service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mynode-service
+spec:
+  type: NodePort
+  selector:
+    app: mynode
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30080
+
+Step 3: Apply Both
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+
+Step 4: Verify
+kubectl get pods
+kubectl get services
+
+
+✅ Access app at http://localhost:30080
+
+🧹 PART 5: Clean Up
+kubectl delete -f deployment.yaml
+kubectl delete -f service.yaml
+
+🧾 QUICK SUMMARY (Perfect for Exam)
+Step	Tool	Command	What It Does
+1	Docker	docker build -t myapp .	Builds image
+2	Docker	docker run -d -p 8080:3000 myapp	Runs container
+3	Kubernetes	kubectl get nodes	Checks cluster
+4	Kubernetes	kubectl apply -f deployment.yaml	Deploys app
+5	Kubernetes	kubectl apply -f service.yaml	Exposes app
+6	Kubernetes	kubectl get pods	Lists pods
+7	Kubernetes	kubectl get svc	Lists services
+8	Kubernetes	kubectl delete -f <file>	Deletes resources
