@@ -20,7 +20,7 @@ docker --version
 4) docker ps - display running containers
 5) docker ps -a - display all containers
 
-
+7) docker start <cont_id> - start a stopped container
 6) docker stop <cont_id> - stop running containers
 7) docker rm <cont_id> - remove containers
 8) docker rmi nginx - remove image
