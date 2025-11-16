@@ -4,18 +4,18 @@
 Docker is used to package applications and their dependencies into containers so they can run anywhere.
 
 ⚙️ Common Docker Commands (Cheatsheet Style)
-Command	Description	Example
-docker --version	Check Docker version	docker --version
-docker pull <image>	Download image from Docker Hub	docker pull nginx
-docker images	List all downloaded images	docker images
-docker run <image>	Run a container from image	docker run nginx
+Command	Description		Example
+docker --version		Check Docker version	docker --version
+docker pull <image>		Download image from Docker Hub	docker pull nginx
+docker images			List all downloaded images	docker images
+docker run <image>		Run a container from image	docker run nginx
 docker run -d -p 8080:80 nginx	Run container in background, map port 80 to 8080	Access at: http://localhost:8080
-docker ps	Show running containers	docker ps
-docker ps -a	Show all containers (including stopped)	docker ps -a
+docker ps			Show running containers	docker ps
+docker ps -a			Show all containers (including stopped)	docker ps -a
 docker stop <container_id>	Stop a running container	docker stop 1a2b3c
 docker rm <container_id>	Remove container	docker rm 1a2b3c
-docker rmi <image_id>	Remove image	docker rmi nginx
-docker build -t myapp .	Build Docker image from Dockerfile	Inside your project folder
+docker rmi <image_id>		Remove image	docker rmi nginx
+docker build -t myapp .		Build Docker image from Dockerfile	Inside your project folder
 docker exec -it <container_id> bash	Open terminal inside container	Used to inspect
 docker logs <container_id>	View container logs	docker logs mynginx
 📦 Example: Simple Containerized App
