@@ -144,3 +144,8 @@ kubectl get all	Check if cluster is empty
 
 Would you like me to give you a single PowerShell automation script that does all these steps (create, expose, verify, and open in browser automatically)?
 It’s perfect for labs and demos — just run once and it shows your app live.
+
+
+
+
+minikube start --driver docker

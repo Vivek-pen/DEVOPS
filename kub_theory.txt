@@ -1,0 +1,12 @@
+Kubernetes is an orchestration tool which is used to manage containers and provides scaling and backup
+
+Cluster - contains a master node and several worker nodes
+
+node - physical or vitual machine, conatins multiple pods
+pods - abstraction over a container to allow working only with Kubernetes
+    1 application per pod
+
+service - permanent ip address to each pod
+
+
+

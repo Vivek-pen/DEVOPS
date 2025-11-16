@@ -37,13 +37,18 @@ COPY . .
 CMD ["node", "server.js"]
 
 
-3️⃣ Run commands:
+3️⃣ Push to docker hub and deploy using minikube
+docker build -t nodeforkube .
+docker login 
+docker tag nodeforkube vivek130405/nodeforkube
+docker push <dockerhubuser>/nodeforkube
+->install minikube
+minikube version
+minikube start --driver=docker
+kubectl create deployment nodeforkube --image=vivek130405/nodeforkube
+kubectl expose deployment nodeforkube --type=NodePort --port=3000
+minikube service nodeforkube
 
-docker build -t mynodeapp .
-docker run -d -p 8080:3000 mynodeapp
-
-
-✅ Visit http://localhost:8080 → “Hello from Docker Container!”
 
 🧠 PART 2: KUBERNETES (K8s)
 📘 What is Kubernetes?
@@ -51,32 +56,25 @@ docker run -d -p 8080:3000 mynodeapp
 Kubernetes automates the deployment, scaling, and management of containers.
 Think of it as a container orchestrator — it manages Docker containers.
 
-⚙️ Setting Up Kubernetes on Windows (Simple Steps)
-
-1️⃣ Install Docker Desktop → Settings → Enable “Kubernetes”
-🟢 Wait until Kubernetes status says “Running”.
-
-2️⃣ Verify Installation
-
-kubectl version --client
 kubectl get nodes
-
-
 👉 Should show one node (Docker Desktop).
+
+
 
 🧩 PART 3: Common Kubernetes Commands (Cheatsheet)
 Command	Description	Example
 kubectl version	      Show Kubernetes version	kubectl version
 kubectl get nodes	    Show cluster nodes	kubectl get nodes
 kubectl get pods	    Show all pods	kubectl get pods
-kubectl get services	Show all services	kubectl get services
-kubectl create -f <file>.yaml	Create resource from YAML file	kubectl create -f deployment.yaml
-kubectl apply -f <file>.yaml	Create/update resource	kubectl apply -f deployment.yaml
-kubectl delete -f <file>.yaml	Delete resource	kubectl delete -f deployment.yaml
-kubectl logs <pod-name>	View logs from a pod	kubectl logs mypod
-kubectl exec -it <pod-name> -- bash	Enter inside a running pod	kubectl exec -it mypod -- bash
-kubectl describe pod <pod-name>	View details of a pod	kubectl describe pod mypod
-kubectl get all	Show all resources	kubectl get all
+kubectl get services	    Show all services	kubectl get services
+kubectl create -f <file>.yaml	      Create resource from YAML file	kubectl create -f deployment.yaml
+kubectl apply -f <file>.yaml	      Create/update resource	kubectl apply -f deployment.yaml
+kubectl delete -f <file>.yaml	      Delete resource	        kubectl delete -f deployment.yaml
+kubectl logs <pod-name>		      View logs from a pod	kubectl logs mypod
+kubectl exec -it <pod-name> -- bash   Enter inside a running pod	kubectl exec -it mypod -- bash
+kubectl describe pod <pod-name>	      View details of a pod	kubectl describe pod mypod
+kubectl get all			      Show all resources	kubectl get all
+
 🚀 PART 4: Deploy Docker App on Kubernetes
 Step 1: Create Deployment File deployment.yaml
 apiVersion: apps/v1
@@ -129,9 +127,9 @@ kubectl delete -f deployment.yaml
 kubectl delete -f service.yaml
 
 🧾 QUICK SUMMARY (Perfect for Exam)
-Step	Tool	Command	What It Does
-1	Docker	docker build -t myapp .	Builds image
-2	Docker	docker run -d -p 8080:3000 myapp	Runs container
+Step	Tool		Command	What It Does
+1	Docker		docker build -t myapp .	Builds image
+2	Docker		docker run -d -p 8080:3000 myapp	Runs container
 3	Kubernetes	kubectl get nodes	Checks cluster
 4	Kubernetes	kubectl apply -f deployment.yaml	Deploys app
 5	Kubernetes	kubectl apply -f service.yaml	Exposes app
