@@ -66,9 +66,9 @@ kubectl get nodes
 
 🧩 PART 3: Common Kubernetes Commands (Cheatsheet)
 Command	Description	Example
-kubectl version	Show Kubernetes version	kubectl version
-kubectl get nodes	Show cluster nodes	kubectl get nodes
-kubectl get pods	Show all pods	kubectl get pods
+kubectl version	      Show Kubernetes version	kubectl version
+kubectl get nodes	    Show cluster nodes	kubectl get nodes
+kubectl get pods	    Show all pods	kubectl get pods
 kubectl get services	Show all services	kubectl get services
 kubectl create -f <file>.yaml	Create resource from YAML file	kubectl create -f deployment.yaml
 kubectl apply -f <file>.yaml	Create/update resource	kubectl apply -f deployment.yaml

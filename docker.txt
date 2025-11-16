@@ -24,3 +24,15 @@ docker --version
 6) docker stop <cont_id> - stop running containers
 7) docker rm <cont_id> - remove containers
 8) docker rmi nginx - remove image
+
+
+Building an image on our own
+1) Create a server.js
+2) Create Dockerfile
+    FROM node:18
+    WORKDIR /app
+    COPY . .
+    CMD["node","server.js"]
+
+3) docker build -t mynodeapp .
+4) docker run -d -p 8080:3000 mynodeapp
